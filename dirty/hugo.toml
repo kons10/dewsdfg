@@ -1,4 +1,4 @@
-baseurl = "https://username.github.io"
+baseurl = "https://hugo.kto.f5.si"
 DefaultContentLanguage = "en"
 title = "Beautiful Hugo"
 # Using theme as git submodule
