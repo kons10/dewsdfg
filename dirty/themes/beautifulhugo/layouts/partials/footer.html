@@ -19,7 +19,7 @@
           {{ range .Site.Data.beautifulhugo.social.social_icons }}
             {{- if isset $.Site.Params.author .id }}
               <li>
-		{{ if or ( hasPrefix ( index $.Site.Params.author .id ) "http://" ) ( hasPrefix ( index $.Site.Params.author .id ) "https://" ) }}
+		{{ if or ( hasPrefix ( index $.Site.Params.author .id ) "https://" ) ( hasPrefix ( index $.Site.Params.author .id ) "https://" ) }}
 		  <a {{ if .rel }}rel="{{ .rel }}"{{- end -}} href="{{ printf "%s" (index $.Site.Params.author .id) }}" title="{{ .title }}">
 		{{ else }}
 		  <a {{ if .rel }}rel="{{ .rel }}"{{- end -}} href="{{ printf .url (index $.Site.Params.author .id) }}" title="{{ .title }}">
@@ -139,7 +139,7 @@
 </script>
 <noscript>
 <!-- Piwik Image Tracker -->
-<img src="http://{{ .Site.Params.piwik.server }}/piwik.php?idsite={{ .Site.Params.piwik.id }}&amp;rec=1" style="border:0" alt="" />
+<img src="https://{{ .Site.Params.piwik.server }}/piwik.php?idsite={{ .Site.Params.piwik.id }}&amp;rec=1" style="border:0" alt="" />
 <!-- End Piwik -->
 </noscript>
 <!-- End Piwik Code -->
