@@ -86,4 +86,4 @@ pygmentsCodefencesGuessSyntax = true
     url = "page/about/"
     weight = 2
     icon = "account_circle"
-    name = "tag"
+    name = "account"
