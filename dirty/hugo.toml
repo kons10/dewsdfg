@@ -78,10 +78,10 @@ pygmentsCodefencesGuessSyntax = true
 
 [[menu.main]]
     url = "tags"
-    weight = 2
+    weight = 1
     icon = "tag"
 
 [[menu.main]]
     url = "page/about/"
-    weight = 3
+    weight = 2
     icon = "account_circle"
