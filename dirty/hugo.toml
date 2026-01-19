@@ -2,7 +2,7 @@ baseurl = "https://hugo.kto.f5.si"
 DefaultContentLanguage = "ja"
 title = "汐のブログ"
 # Using theme as git submodule
-theme = "beautifulhugo"
+theme = "material"
 # Or when using theme as hugo module
 # theme = "github.com/halogenica/beautifulhugo"
 pygmentsStyle = "trac"
