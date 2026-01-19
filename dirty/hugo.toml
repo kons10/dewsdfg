@@ -59,10 +59,10 @@ pygmentsCodefencesGuessSyntax = true
   github = "kons10"
   twitter = "k0ns10"
   snapchat = "username"
-  instagram = "username"
+  instagram = "k0ns10"
   youtube = "user/username" # or channel/channelname
-  paypal = "username"
-  telegram = "username"
+  # paypal = "username"
+  telegram = "k0ns10"
   500px = "username"
   codepen = "username"
   mastodon = "url"
@@ -73,7 +73,7 @@ pygmentsCodefencesGuessSyntax = true
   discord = "invite code (https://discord.gg/XXXXXXX)"
   strava = "userid"
   lastfm = "username"
-  bluesky = "username"
+  bluesky = "kto.f5.si"
 
 
 [[menu.main]]
