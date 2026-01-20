@@ -1,4 +1,4 @@
-name: Update Submodules
+name: 🔄Update Submodules
 on:
   schedule:
     - cron: '*/30 * * * *'
@@ -17,24 +17,24 @@ jobs:
           fetch-depth: 0  # 完全な履歴を取得
           token: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Configure git
+      - name: 🔐Configure git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
       
-      - name: Update submodules
+      - name: 🔄Update submodules
         run: |
           git submodule foreach 'git fetch origin && git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main) && git pull origin $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)'
           git add .
           
-      - name: Check for changes
+      - name: 👀Check for changes
         id: check
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
           
-      - name: Create Pull Request
+      - name: ➕Create Pull Request
         if: steps.check.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
