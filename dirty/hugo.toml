@@ -77,13 +77,13 @@ pygmentsCodefencesGuessSyntax = true
 
 
 [[menu.main]]
-    url = "/tags/"
+    url = "tags/"
     weight = 1
     [menu.main.params]
     icon = "tag"
 
 [[menu.main]]
-    url = "/page/about/"
+    url = "page/about/"
     weight = 2
     [menu.main.params]
     icon = "account_circle"
