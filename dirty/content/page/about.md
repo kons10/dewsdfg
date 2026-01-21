@@ -1,16 +1,35 @@
 ---
-title: About me
-subtitle: Why you'd want to go on a date with me
-comments: false
+title: 汐 / @k0ns10
+subtitle: 汐のプロフィール
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+# 汐 / @k0ns10
 
-- I rock a great mustache
-- I'm extremely loyal to my family
+![avatar](https://pbs.twimg.com/profile_images/1992970281678413824/8xw6Aixl.jpg)
 
-What else do you need?
+🏳️‍⚧️ **MtF（未HRT）** ✌️  
+日本人 | **美味しい楽しい、アジア大好き**  
+のんびり **中国語学習中**（在学习中文！）
 
-### my history
+## やってること
+- **オープンソース開発**（OSS Dev.）
+  Material Web Componentsに大興奮大好きな狂人
+- **自作PC / ガジェット**  
+  ARGBはじめました（2026年1月18日）
+  Linux、キーボード、スマホ、自宅鯖（昔やってた）
+- **アニメ・ゲーム・音楽作品**  
+  ヒロアカ、化物語、東方アレンジ曲、ブルアカ、音ゲーとか
+- **日常**  
+  相互フォロー大歓迎（💯互fo）  
+  政治・社会ネタにたまに反応したり、病院行ったり
 
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+## 好きなもの
+- 同人サークル**[Silver Forest](http://www.silver-forest.net/)**の音楽
+- アジア料理、主にケバブとか台湾ラーメンとか！
+- **Material Design**
+
+## 関連リンク等の情報
+- ⚠️エッチな話題・別世界線は **@k0nstoo** へお願いします
+- 👁️‍🗨️マシュマロ（質問コーナー） → [https://marshmallow-qa.com/...](https://marshmallow-qa.com/1lh7jhgh484v528#new_message)
+
+よろしくおねがいします！
