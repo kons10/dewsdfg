@@ -3,8 +3,6 @@ title: 汐 / @k0ns10
 subtitle: 汐のプロフィール
 ---
 
-# 汐 / @k0ns10
-
 ![avatar](https://pbs.twimg.com/profile_images/1992970281678413824/8xw6Aixl.jpg)
 
 🏳️‍⚧️ **MtF（未HRT）** ✌️  
