@@ -26,42 +26,29 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          # 履歴をすべて取得して、最終更新日などのメタデータを正確にする
           fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
+          # バージョンをここに書くだけでOK。extended版もデフォルトで入るよ
           hugo-version: '0.128.0'
           extended: true
-
-      # Hugoのリソースキャッシュ
-      - name: Cache Hugo resources
-        uses: actions/cache@v4
-        with:
-          path: ${{ runner.temp }}/hugo_cache
-          key: ${{ runner.os }}-hugo-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-hugo-
-
-      # Node.jsのキャッシュ
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
 
       - name: Install Node.js dependencies
+        # package-lock.jsonがある時だけnpm ciを実行（キャッシュを活用するとなお良し）
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
 
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
+        # working-directoryをここに追加してスッキリさせる
         working-directory: ./dirty
         run: |
           hugo \
