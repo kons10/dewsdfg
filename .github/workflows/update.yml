@@ -1,7 +1,7 @@
 name: 🔄Update Submodules
 on:
   schedule:
-    - cron: '*/3 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -11,11 +11,22 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Gitキャッシュ（サブモジュールの.gitディレクトリとか）
+      - name: Cache Git objects
+        uses: actions/cache@v4
+        with:
+          path: |
+            **/.git/modules
+            .git/modules
+          key: ${{ runner.os }}-git-${{ hashFiles('.gitmodules') }}
+          restore-keys: |
+            ${{ runner.os }}-git-
       
       - name: 🔐Configure git
         run: |
@@ -25,7 +36,6 @@ jobs:
       - name: 🎲Generate random ID
         id: random
         run: |
-          # A-Z, a-zからランダムに5文字抽出
           ID=$(tr -dc 'A-Za-z' < /dev/urandom | head -c 5)
           echo "id=$ID" >> $GITHUB_OUTPUT
       
@@ -45,9 +55,7 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
-          # ここで生成したIDを末尾に付与
           commit-message: "🤖chore: update submodules ${{ steps.random.outputs.id }}"
-          # ブランチ名にもIDを入れると、古いプルリクと競合しなくなるよ
           branch: update-submodules-${{ steps.random.outputs.id }}
           title: "🤖Update submodules ${{ steps.random.outputs.id }}"
           labels: dependencies, submodules
