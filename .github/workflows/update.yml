@@ -46,6 +46,6 @@ jobs:
           # ここで生成したIDを末尾に付与
           commit-message: "🤖chore: update submodules ${{ steps.random.outputs.id }}"
           # ブランチ名にもIDを入れると、古いプルリクと競合しなくなるよ
-          branch: update-submodules-${{ steps.random.outputs.id }}
+          branch: update-submodules
           title: "🤖Update submodules ${{ steps.random.outputs.id }}"
           labels: dependencies, submodules
