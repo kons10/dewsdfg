@@ -11,39 +11,27 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      # Gitキャッシュ（サブモジュールの.gitディレクトリとか）
-      - name: Cache Git objects
-        uses: actions/cache@v4
-        with:
-          path: |
-            **/.git/modules
-            .git/modules
-          key: ${{ runner.os }}-git-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-git-
       
       - name: 🔐Configure git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global url."https://github.com/".insteadOf git://github.com/
 
       - name: 🎲Generate random ID
         id: random
         run: |
+          # A-Z, a-zからランダムに5文字抽出
           ID=$(tr -dc 'A-Za-z' < /dev/urandom | head -c 5)
           echo "id=$ID" >> $GITHUB_OUTPUT
       
       - name: 🔄Update submodules
         run: |
-          git submodule update --init --recursive
-          git submodule foreach --recursive 'git fetch origin && git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main) && git pull origin $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)' || true
+          git submodule foreach 'git fetch origin && git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main) && git pull origin $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)'
           git add .
           
       - name: 👀Check for changes
@@ -57,7 +45,9 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
+          # ここで生成したIDを末尾に付与
           commit-message: "🤖chore: update submodules ${{ steps.random.outputs.id }}"
+          # ブランチ名にもIDを入れると、古いプルリクと競合しなくなるよ
           branch: update-submodules-${{ steps.random.outputs.id }}
           title: "🤖Update submodules ${{ steps.random.outputs.id }}"
           labels: dependencies, submodules
