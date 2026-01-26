@@ -9,43 +9,68 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v6
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v6
         with:
           submodules: recursive
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: 🔐Configure git
+      - name: 🔐 Configure git
         run: |
+          echo "⚙️ Let's set up your Git user settings..."
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          echo "✅ Settings complete!"
 
-      - name: 🎲Generate random ID
-        id: random
+      - name: 🔄 Update submodules
+        id: update_step
         run: |
-          # A-Z, a-zからランダムに5文字抽出
-          ID=$(tr -dc 'A-Za-z' < /dev/urandom | head -c 5)
-          echo "id=$ID" >> $GITHUB_OUTPUT
-      
-      - name: 🔄Update submodules
-        run: |
-          git submodule foreach 'git fetch origin && git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main) && git pull origin $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)'
+          echo "🚀 Checking submodules are up to date..."
+          # Check the specified branch for each submodule
+          git submodule foreach '
+            BRANCH=$(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)
+            echo "📂 $name branch: Getting $BRANCH..."
+            git fetch origin $BRANCH
+            git checkout $BRANCH
+            git pull origin $BRANCH
+          '
           git add .
+          echo "✨ Submodule update process is complete!"
           
-      - name: 👀Check for changes
+      - name: 👀 Check for changes
         id: check
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             echo "changed=true" >> $GITHUB_OUTPUT
+            echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+            echo "📢 Found an update!"
+            echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨"
+            echo "😴 No changes. Everything is up to date!"
+            echo "✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨"
           fi
           
-      - name: ➕Create Pull Request
+      - name: ➕ Create or Update Pull Request
         if: steps.check.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
-          # ここで生成したIDを末尾に付与
-          commit-message: "🤖chore: update submodules ${{ steps.random.outputs.id }}"
-          # ブランチ名にもIDを入れると、古いプルリクと競合しなくなるよ
-          branch: update-submodules
-          title: "🤖Update submodules ${{ steps.random.outputs.id }}"
+          # By using a fixed name, you can overwrite old branches without increasing them.
+          branch: auto-update/submodules
+          delete-branch: true
+          commit-message: "🤖chore: update submodules"
+          title: "🤖Update submodules"
+          body: |
+            ## 🔄 Automatic submodule updates
+            I found a new update and created (or updated) a PR!
           labels: dependencies, submodules
+
+      - name: 🏁 Final Summary
+        run: |
+          if [[ "${{ steps.check.outputs.changed }}" == "true" ]]; then
+            echo "🎉 Work done! Check out the pull request on GitHub."
+          else
+            echo "🌈 No need to do anything! That's it for today. Good job!"
+          fi
