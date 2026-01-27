@@ -15,7 +15,7 @@ theme = "material"
     # 行番号をテーブル形式で表示（コピペしやすい）
     lineNumbersInTable = false
     # CSSクラスを使用（style.cssで色をカスタマイズ可能）
-    noClasses = false
+    noClasses = true
     # ハイライトのスタイル（monokai, dracula, github, vs など）
     style = "monokai"
     # タブ幅
