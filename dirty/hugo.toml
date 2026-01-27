@@ -1,20 +1,25 @@
 baseurl = "https://hugo.kto.f5.si"
 DefaultContentLanguage = "ja"
 title = "汐Official"
-# Using theme as git submodule
 theme = "material"
-# Or when using theme as hugo module
-# theme = "github.com/halogenica/beautifulhugo"
-pygmentsStyle = "trac"
-pygmentsUseClasses = true
-pygmentsCodeFences = true
-pygmentsCodefencesGuessSyntax = true
-#pygmentsUseClassic = true
-#pygmentOptions = "linenos=inline"
 
-[markup.highlight]
-  codeFences = true
-  noClasses = false
+# コードハイライト設定
+[markup]
+  [markup.highlight]
+    # コードブロックのハイライトを有効化
+    codeFences = true
+    # 言語を自動推測
+    guessSyntax = true
+    # 行番号を表示する場合はtrueに
+    lineNos = false
+    # 行番号をテーブル形式で表示（コピペしやすい）
+    lineNumbersInTable = false
+    # CSSクラスを使用（style.cssで色をカスタマイズ可能）
+    noClasses = false
+    # ハイライトのスタイル（monokai, dracula, github, vs など）
+    style = "monokai"
+    # タブ幅
+    tabWidth = 4
 
 [Services]
   [Services.Disqus]
