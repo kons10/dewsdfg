@@ -1,115 +1,88 @@
 ---
-title: Hugoコードハイライトの使い方
+title: "コードハイライトテスト"
 date: 2026-01-28
+tags: ["test", "code"]
 ---
 
-使い方説明するね
+コードハイライトがちゃんと動くかテストするよ！
 
-## 設定完了！
+## JavaScriptのサンプル
 
-`hugo.toml`と`style.css`を更新したから、コードハイライトが使えるようになったよ。
-
-## 使い方
-
-マークダウンファイルでコードブロックを書くときは、バッククォート3つ（```）を使って、言語名を指定するだけ。
-
-### 例1: JavaScript
-
-\```javascript
+```javascript
 const greeting = "こんにちは！";
 console.log(greeting);
 
 function add(a, b) {
   return a + b;
 }
-\```
 
-### 例2: Python
+const result = add(5, 3);
+console.log(`5 + 3 = ${result}`);
+```
 
-\```python
+## Pythonのサンプル
+
+```python
 def greet(name):
     return f"こんにちは、{name}さん！"
 
 print(greet("汐"))
-\```
 
-### 例3: HTML
+# リスト内包表記
+squares = [x**2 for x in range(10)]
+print(squares)
+```
 
-\```html
+## HTMLのサンプル
+
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>サンプル</title>
+    <title>サンプルページ</title>
 </head>
 <body>
     <h1>Hello World!</h1>
+    <p>これはテストです。</p>
 </body>
 </html>
-\```
+```
 
-### 例4: CSS
+## CSSのサンプル
 
-\```css
+```css
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f0f0f0;
+  padding: 2rem;
 }
-\```
 
-## 対応している言語
-
-Hugoは以下のような言語に対応してるよ：
-
-- JavaScript / TypeScript
-- Python
-- Go
-- HTML / CSS
-- Java / Kotlin
-- Rust
-- Ruby
-- PHP
-- Shell / Bash
-- JSON / YAML / TOML
-- その他多数！
-
-言語名を指定しなくても`guessSyntax = true`のおかげで自動判別してくれる。
-
-## カスタマイズ方法
-
-### スタイルを変更したい場合
-
-`hugo.toml`の`style`パラメータを変更すれば、別のテーマが使えるよ：
-
-```toml
-[markup.highlight]
-  style = "dracula"  # または github, vs, gruvbox など
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 ```
 
-利用可能なスタイルはHugoの公式ドキュメントで確認できる。
+## Goのサンプル
 
-### 行番号を表示したい場合
+```go
+package main
 
-```toml
-[markup.highlight]
-  lineNos = true
-  lineNumbersInTable = true
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, 汐!")
+    
+    result := add(5, 3)
+    fmt.Printf("5 + 3 = %d\n", result)
+}
+
+func add(a, b int) int {
+    return a + b
+}
 ```
 
-これで行番号が表示されるようになる。`lineNumbersInTable = true`にするとコピペしやすくなるよ。
-
-## トラブルシューティング
-
-### コードハイライトが効かない場合
-
-1. `hugo.toml`が正しく配置されているか確認（プロジェクトルートに配置）
-2. `style.css`が`static/css/`ディレクトリに配置されているか確認
-3. Hugoを再起動してみる：`hugo server --disableFastRender`
-
-### 色がおかしい場合
-
-`noClasses = false`になっているか確認。これがtrueだとインラインスタイルが使われて、CSSが無視される。
-
-それじゃ、楽しいコーディングライフを！
+これで色がついてれば成功！
