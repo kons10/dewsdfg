@@ -12,6 +12,10 @@ pygmentsCodefencesGuessSyntax = true
 #pygmentsUseClassic = true
 #pygmentOptions = "linenos=inline"
 
+[markup.highlight]
+  codeFences = false
+  noClasses = false
+
 [Services]
   [Services.Disqus]
     # Shortname = "XXX"
