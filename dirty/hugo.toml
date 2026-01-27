@@ -13,7 +13,7 @@ pygmentsCodefencesGuessSyntax = true
 #pygmentOptions = "linenos=inline"
 
 [markup.highlight]
-  codeFences = false
+  codeFences = true
   noClasses = false
 
 [Services]
