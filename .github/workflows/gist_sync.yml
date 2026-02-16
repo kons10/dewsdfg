@@ -12,7 +12,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -20,15 +21,14 @@ jobs:
           python-version: '3.x'
           cache: 'pip'
 
-      - name: Install dependencies
-        run: pip install requests
-
-      - name: Install dependencies
+      - name: Create requirements.txt and Install
         run: |
+          echo "janome" > requirements.txt
+          echo "requests" >> requirements.txt
           python -m pip install --upgrade pip
-          pip install janome requests  # ← ここに janome を追加！
+          pip install -r requirements.txt
 
-      - name: Run python scripts/update_gist.py
+      - name: Run script
         run: python scripts/update_gist.py
 
       - name: Commit and Push
