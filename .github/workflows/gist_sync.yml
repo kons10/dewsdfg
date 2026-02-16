@@ -26,7 +26,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add content/posts/*.md
+          git add dirty/content/posts/*.md
           if ! git diff --cached --exit-code; then
             git commit -m "chore: add latest gist post"
             git push
