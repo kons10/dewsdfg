@@ -42,13 +42,13 @@ tags = [ext, "gist"]
 
 # 3. Hugo用のフロントマター (TOML形式 +++) を作成
 with open(filepath, "w", encoding="utf-8") as f:
-    f.write("+++\n")
+    f.write("---\n")
     f.write(f"title = \"{summary}\"\n")
     f.write(f"date = '{created_at}'\n")
     f.write(f"gist_id = \"{gist_id}\"\n")
     f.write(f"tags = {tags}\n")
     f.write("draft = false\n")
-    f.write("+++\n\n")
+    f.write("---\n\n")
     f.write(content)
 
 print(f"自動プロパティ補完で保存したよ: {filename}")
