@@ -15,19 +15,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Create requirements.txt
+        run: |
+          echo "janome" > requirements.txt
+          echo "requests" >> requirements.txt
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
           cache: 'pip'
 
-      - name: Create requirements.txt and Install
+      - name: Install dependencies
         run: |
-          echo "janome" > requirements.txt
-          echo "requests" >> requirements.txt
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
       - name: Run script
         run: python scripts/update_gist.py
 
