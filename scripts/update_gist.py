@@ -20,7 +20,7 @@ gist_id = gist['id']
 created_at = gist['created_at']
 dt = datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%SZ")
 
-# ファイル名を「2007年01月08日.md」の形式にする
+# ファイル名を「2007年01月08日.md」の形式にする（0埋め）
 filename = dt.strftime("%Y年%m月%d日.md")
 filepath = os.path.join(POSTS_DIR, filename)
 
@@ -32,19 +32,23 @@ if os.path.exists(filepath):
 first_file_name = list(gist['files'].keys())[0]
 raw_url = gist['files'][first_file_name]['raw_url']
 content = requests.get(raw_url).text
+
+# 概要を取得
 summary = (gist['description'] or content.split('\n')[0][:100]).replace('"', '\\"')
+
+# 拡張子からタグを推測
 ext = first_file_name.split('.')[-1] if '.' in first_file_name else "text"
 tags = [ext, "gist"]
 
-# 3. Hugo用のフロントマター作成
+# 3. Hugo用のフロントマター (YAML形式 ---) を作成
 with open(filepath, "w", encoding="utf-8") as f:
     f.write("---\n")
-    f.write(f"title = \"{summary}\"\n")
-    f.write(f"date = '{created_at}'\n")
-    f.write(f"gist_id = \"{gist_id}\"\n")
-    f.write(f"tags = {tags}\n")
-    f.write("draft = false\n")
+    f.write(f"title: \"{summary}\"\n")
+    f.write(f"date: {created_at}\n")
+    f.write(f"gist_id: \"{gist_id}\"\n")
+    f.write(f"tags: {tags}\n")
+    f.write("draft: false\n")
     f.write("---\n\n")
     f.write(content)
 
-print(f"0埋め日付形式で保存したよ: {filename}")
+print(f"YAML形式・0埋め日付で保存したよ: {filename}")
