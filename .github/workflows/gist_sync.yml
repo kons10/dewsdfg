@@ -1,4 +1,4 @@
-name: Sync Latest Gist to Hugo
+name: 📝Sync Latest Gist to Hugo
 
 on:
   schedule:
