@@ -22,29 +22,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: 👁‍🗨Checkout
+        uses: actions/checkout@v6
         with:
           submodules: recursive
           # 履歴をすべて取得して、最終更新日などのメタデータを正確にする
           fetch-depth: 0
 
-      - name: Setup Hugo
+      - name: ⚡Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           # バージョンをここに書くだけでOK。extended版もデフォルトで入るよ
-          hugo-version: '0.128.0'
-          extended: true
+         hugo-version: 'latest'
 
-      - name: Setup Pages
+      - name: 📜Setup Pages
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Install Node.js dependencies
+      - name: 📦Install Node.js dependencies
         # package-lock.jsonがある時だけnpm ciを実行（キャッシュを活用するとなお良し）
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
 
-      - name: Build with Hugo
+      - name: 🏗Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
@@ -57,7 +56,7 @@ jobs:
             --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v6
         with:
           path: ./dirty/public
 
