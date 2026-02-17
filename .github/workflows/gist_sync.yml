@@ -34,6 +34,7 @@ jobs:
         run: python scripts/update_gist.py
 
       - name: Commit and Push
+        id: push_step
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -44,3 +45,15 @@ jobs:
           else
             echo "変更がないので終了するね。"
           fi
+# 記事が増えた時だけ、デプロイ用ワークフローをキックする
+      - name: Trigger Hugo Deploy
+        if: steps.push_step.outputs.pushed == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'hugo.yml',
+              ref: 'main'
+            })
