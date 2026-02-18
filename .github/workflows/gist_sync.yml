@@ -15,6 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: |
+          echo "janome" > requirements.txt
+          echo "requests" >> requirements.txt
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -23,8 +28,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          echo "janome" > requirements.txt
-          echo "requests" >> requirements.txt
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
