@@ -40,11 +40,10 @@ jobs:
           if ! git diff --cached --exit-code; then
             git commit -m "chore: add latest gist post"
             git push
-            # 変更があった場合のみ、次のステップに伝えるフラグを立てる
-            echo "pushed=true" >> $GITHUB_OUTPUT
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
           else
             echo "変更がないので終了するね。"
-            echo "pushed=false" >> $GITHUB_OUTPUT
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Trigger Hugo Deploy
