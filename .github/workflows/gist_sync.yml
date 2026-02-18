@@ -19,13 +19,13 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-          [cite_start]cache: 'pip' # キャッシュを有効にしてインストール時間を短縮 [cite: 9]
+          cache: 'pip'
 
       - name: Install dependencies
-        # ここで一気にインストールせず、キャッシュが効くように requirements.txt を作成
         run: |
           echo "janome" > requirements.txt
           echo "requests" >> requirements.txt
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Run script
@@ -47,7 +47,6 @@ jobs:
           fi
 
       - name: Trigger Hugo Deploy
-        # 実際にPushされた時だけ実行されるように条件を厳密にする
         if: steps.push_step.outputs.pushed == 'true'
         uses: actions/github-script@v6
         with:
