@@ -3,6 +3,8 @@ DefaultContentLanguage = "ja"
 title = "Xī's memo"
 theme = "material"
 copyright = "© 2026 汐（Sio【Xī】）"
+[author]
+  name = "汐（Sio【Xī】）"
 
 # コードハイライト設定
 [markup]
