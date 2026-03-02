@@ -1,1 +1,3 @@
-# 頑張って作ってるからおねがいね！
+# ブログ
+## 重要リンク
+https://github.com/ams-www/material-blog-theme/
