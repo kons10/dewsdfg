@@ -1,6 +1,6 @@
 ---
-title: 汐 / @k0ns10
-subtitle: 汐のプロフィール
+title: 奏音 / @k0ns10
+subtitle: 奏音のプロフィール
 ---
 
 ![avatar](https://pbs.twimg.com/profile_images/1992970281678413824/8xw6Aixl.jpg)
@@ -22,12 +22,12 @@ subtitle: 汐のプロフィール
   政治・社会ネタにたまに反応したり、病院行ったり
 
 ## 好きなもの
-- 同人サークル**[Silver Forest](http://www.silver-forest.net/)**の音楽
+- 同人サークル[Silver Forest](http://www.silver-forest.net/)の音楽
 - アジア料理、主にケバブとか台湾ラーメンとか！
 - **Material Design**
 
 ## 関連リンク等の情報
-- ⚠️エッチな話題・別世界線は **@k0nstoo** へお願いします
-- 👁️‍🗨️マシュマロ（質問コーナー） → [https://marshmallow-qa.com/...](https://marshmallow-qa.com/1lh7jhgh484v528#new_message)
+- ⚠️エッチな話題・別世界線は **[@k0nstoo](https://x.com/k0nstoo)** へお願いします
+- 👁️‍🗨️マシュマロ（質問コーナー） → [https://marshmallow-qa.com/1lh7…](https://marshmallow-qa.com/1lh7jhgh484v528#new_message)
 
 よろしくおねがいします！
