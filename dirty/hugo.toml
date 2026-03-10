@@ -1,11 +1,11 @@
 baseurl = "https://hugo.kto.f5.si"
 DefaultContentLanguage = "ja"
-title = "Xī's memo"
+title = "Kanon's memo"
 theme = "material"
-copyright = "© 2026 汐（Sio【Xī】）"
+copyright = "© 2026 奏音（Kanon）"
 # 作者設定
 [Params]
-  author = "汐（Sio【Xī】）"
+  author = "奏音（Kanon）"
 # コードハイライト設定
 [markup]
   [markup.highlight]
