@@ -5,7 +5,7 @@ on:
 
 permissions:
       actions: write    # ← これが超重要！ワークフローをキックするのに必要
-      contents: read    # リポジトリを読むために必要
+      contents: write    # リポジトリを読むために必要
 
 jobs:
   build:
