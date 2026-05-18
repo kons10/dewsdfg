@@ -42,7 +42,7 @@ jobs:
             echo "updated=true" >> $GITHUB_OUTPUT
             git add .
             git commit -m "🤖 chore: update submodules to latest"
-            git push origin main
+            git push origin main --force-with-lease
           else
             echo "updated=false" >> $GITHUB_OUTPUT
             echo "😴 変更なし。全部最新だよ！"
