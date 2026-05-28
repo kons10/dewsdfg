@@ -1,0 +1,4 @@
+janome
+requests
+gliclass
+torch
