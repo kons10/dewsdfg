@@ -1,4 +1,2 @@
 janome
 requests
-gliclass
-torch
