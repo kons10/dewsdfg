@@ -1,56 +1,66 @@
-name: 📝Sync Latest Gist to Hugo
+name: 🚀 Update Submodules & Deploy Hugo to Cloudflare Pages
 
 on:
+  push:
+    branches: ["main"]
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
 
 permissions:
-      actions: write    # ← これが超重要！ワークフローをキックするのに必要
-      contents: write    # リポジトリを読むために必要
+  contents: write
+  id-token: write
 
 jobs:
-  build:
+  update-and-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
         with:
-          python-version: '3.x'
-          cache: 'pip'
+          submodules: recursive
+          fetch-depth: 0
 
-      - name: Install dependencies
+      - name: 🔐 Configure git
         run: |
-          python -m pip install --upgrade pip
-          pip install -r scripts/requirements.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Run script
-        run: python scripts/update_gist.py
-
-      - name: Commit and Push
-        id: push_step
+      - name: 🔄 Update submodules
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add dirty/content/post/*.md
-          if ! git diff --cached --exit-code; then
-            git commit -m "chore: add latest gist post"
-            git push
-            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          git submodule update --remote --recursive
+
+      - name: 🚀 Commit and Push (if changes exist)
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            git add .
+            git commit -m "🤖 chore: update submodules to latest"
+            git push origin main --force-with-lease
           else
-            echo "変更がないので終了するね。"
-            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            echo "😴 変更なし"
           fi
 
-      - name: Trigger Hugo Deploy
-        if: steps.push_step.outputs.pushed == 'true'
-        uses: actions/github-script@v9
+      - name: ⚡Setup Hugo
+        uses: peaceiris/actions-hugo@v3
         with:
-          script: |
-            github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'hugo.yml',
-              ref: 'main'
-            })
+          hugo-version: 'latest'
+
+      - name: 📦Install Node.js dependencies
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+
+      - name: 🏗Build with Hugo
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+          HUGO_ENVIRONMENT: production
+        working-directory: ./dirty
+        run: |
+          hugo \
+            --gc \
+            --minify
+
+      - name: 🚀 Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dirty/public --project-name=my-hugo-blog --branch=main
