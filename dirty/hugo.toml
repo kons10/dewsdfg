@@ -6,6 +6,22 @@ copyright = "© 2026 奏音（Kanon）"
 # 作者設定
 [Params]
   author = "奏音（Kanon）"
+  [params.giscus]
+  repo = "kons10/hugo-me-wiki"
+  repo_id = "R_kgDOSABtuA"
+  category = "giscus"
+  category_id = "DIC_kwDOSABtuM4DAPv0"
+  mapping = "pathname"
+  strict = "0"
+  reactions_enabled = "1"
+  emit_metadata = "1"
+  input_position = "top"
+  theme = "preferred_color_scheme"
+  lang = "ja"
+  loading = "lazy"
+  crossorigin = "anonymous"
+  async = true
+
 # コードハイライト設定
 [markup]
   [markup.highlight]
