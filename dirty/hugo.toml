@@ -7,20 +7,12 @@ copyright = "© 2026 奏音（Kanon）"
 [Params]
   author = "奏音（Kanon）"
 
-[params.giscus]
-  enabled = true              # ← ここを true にすると有効化
-  repo = "kons10/hugo-me-wiki"
-  repoId = "R_kgDOSABtuA"
-  category = "giscus"
-  categoryId = "DIC_kwDOSABtuM4DAPv0"
-  mapping = "pathname"
-  strict = "0"
-  reactionsEnabled = "1"
-  emitMetadata = "1"
-  inputPosition = "top"
-  theme = "preferred_color_scheme"
-  lang = "ja"
-  loading = "lazy"
+    [params.giscus]
+      enabled = true
+      repo = "kons10/my-hugo-blog"
+      repoId = "R_kgDOQ6vD7g"
+      category = "giscus"
+      categoryId = "DIC_kwDOQ6vD7s4DAUyo"
 
 # コードハイライト設定
 [markup]
